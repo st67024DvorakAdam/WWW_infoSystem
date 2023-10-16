@@ -1,0 +1,4 @@
+- hned po otevření bude dostupná registrace a přihlášení
+- když se přihlásím, tak musím vidět nějakou nástěnku firemních akcí
+- vpravo nahoře vidět jako kdo jsem přihlášen
+- uvidím odkaz na samostné okno s chatováním
