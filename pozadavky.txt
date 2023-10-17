@@ -22,15 +22,15 @@ Databáze
   - text
   - datum přidání
   - čas přidání 
-  - autor příspěvku
+  - Uzivatel
 
 - Zpráva
-  - Odesílatel
-  - Příjemce
-  - Text
-  - Obrázek
-  - Datum 
-  - čas
+  - Odesílatel (uzivatel)
+  - Příjemce (uzivatel)
+  - Text 
+  - Obrázek (img)
+  - Datum a čas (datetime)
+  
 
 PHP
 - šifrovat heslo
