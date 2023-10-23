@@ -6,17 +6,18 @@ Bootstrap
 - uvidím odkaz na samostné okno s chatováním
 
 
-# Databáze
-- Uživatel
-  - Jméno
-  - Příjmení
-  - Pohlaví
-  - Email
-  - telefonní číslo
-  - profilová fotografie
-  - login
-  - heslo
-  - jeAdmin
+Databáze
+- user
+  - first_name
+  - last_name
+  - sex
+  - email
+  - phone_number
+  - img_path
+  - username
+  - password
+  - register_date
+  - 
 
 - Příspěvek na nástěnce
   - foto
@@ -32,8 +33,7 @@ Bootstrap
   - Obrázek (img)
   - Datum a čas (datetime)
   
-
-# PHP
+PHP
 - šifrovat heslo
 - kvůli gdpr šifrovat asi i mail a telefon
 - login musí být univerzální
