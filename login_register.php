@@ -26,6 +26,7 @@ $is_admin = 0;
 $phone_number = NULL;
 $img_path = NULL;
 
+// když není vybranej obrázek nebo číslo - zůstanou null i v db
 if (isset($_POST['img_path']) && $_POST['img_path'] != NULL) {
     $img_path = $_POST['img_path'];
 }
@@ -44,11 +45,11 @@ try {
     $stmt->bindParam(':sex', $sex);
     $stmt->bindParam(':phone_number', $phone_number);
     $stmt->bindParam(':is_administrator', $is_admin);
+    // TODO
     //$stmt->bindParam(':img_path', $img_path);
+    //header('Location: profile.php');
 
     $stmt->execute();
-
-   // header('Location: login.php');
     exit;
 
 } catch (PDOException $e) {
