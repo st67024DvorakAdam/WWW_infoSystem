@@ -8,23 +8,24 @@ Bootstrap
 
 Databáze
 - user
+  - id
   - first_name
   - last_name
   - sex
   - email
   - phone_number
-  - img_path
-  - username
   - password
+  - isAdmin
+  - img_path
   - register_date
-  - 
+    
 
-- Příspěvek na nástěnce
-  - foto
+- user_post
+  - id
+  - img_path
   - text
-  - datum přidání
-  - čas přidání 
-  - Uzivatel
+  - postDateTime
+  - user_id
 
 - Zpráva
   - Odesílatel (uzivatel)
