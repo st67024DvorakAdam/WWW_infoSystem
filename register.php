@@ -48,10 +48,10 @@ $url = "index.php";
                                     </div>
                                 </div>
                             </div>
-                            <form action="login_register.php" method="post">
+                            <form action="login_register.php" method="POST">
                                 <div class="row gy-3 gy-md-4 overflow-hidden">
                                     <div class="col-12">
-                                        <label for="name" class="form-label">Name <span
+                                        <label for="name" class="form-label">First name <span
                                                 class="text-danger">*</span></label>
                                         <input type="email" class="form-control" name="first_name" id="first_name"
                                             placeholder="Jan" required>
@@ -61,7 +61,7 @@ $url = "index.php";
                                 <form action="login.php" method="post">
                                     <div class="row gy-3 gy-md-4 overflow-hidden">
                                         <div class="col-12">
-                                            <label for="surname" class="form-label">Surname <span
+                                            <label for="surname" class="form-label">Last name <span
                                                     class="text-danger">*</span></label>
                                             <input type="email" class="form-control" name="last_name" id="last_name"
                                                 placeholder="Novak" required>
