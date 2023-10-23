@@ -12,7 +12,8 @@ $url = "index.php";
 <html lang="en">
 
 <head>
-    <title>Bootstrap</title>
+    <title>INFOSYSTEM s r.o.</title>
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.2/components/logins/login-5/assets/css/login-5.css" />
