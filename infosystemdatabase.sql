@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1:3306
--- Vytvořeno: Pon 23. říj 2023, 19:45
+-- Vytvořeno: Pon 23. říj 2023, 19:46
 -- Verze serveru: 8.0.31
 -- Verze PHP: 8.0.26
 
