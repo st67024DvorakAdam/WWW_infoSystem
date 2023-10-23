@@ -43,10 +43,36 @@ $url = "index.php";
                             <div class="row">
                                 <div class="col-12">
                                     <div class="mb-5">
-                                        <h3>Log in</h3>
+                                        <h3>Registration</h3>
                                     </div>
                                 </div>
                             </div>
+                            <form action="login.php" method="post">
+                                <div class="row gy-3 gy-md-4 overflow-hidden">
+                                    <div class="col-12">
+                                        <label for="name" class="form-label">Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            placeholder="Jan" required>
+                                    </div>
+                                    </div>
+                                    
+                            <form action="login.php" method="post">
+                                <div class="row gy-3 gy-md-4 overflow-hidden">
+                                    <div class="col-12">
+                                        <label for="surname" class="form-label">Surname <span
+                                                class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            placeholder="Novak" required>
+                                    </div>
+                                    <div class="col-12">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select class="form-select" name="gender" id="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="prefer_not_to_say">Prefer Not to Say</option>
+                    </select>
+                </div>
                             <form action="login.php" method="post">
                                 <div class="row gy-3 gy-md-4 overflow-hidden">
                                     <div class="col-12">
@@ -56,7 +82,21 @@ $url = "index.php";
                                             placeholder="vasemail@priklad.com" required>
                                     </div>
                                     <div class="col-12">
-                                        <label for="password" class="form-label">Heslo <span
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="123-456-7890">
+                </div>
+                <div class="col-12">
+                    <label for="profile-picture" class="form-label">Profile Picture</label>
+                    <input type="file" class="form-control" name="profile-picture" id="profile-picture">
+                </div>
+                                    <div class="col-12">
+                                        <label for="password" class="form-label">Password <span
+                                                class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" name="password" id="password"
+                                            value="" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="password" class="form-label">Password again <span
                                                 class="text-danger">*</span></label>
                                         <input type="password" class="form-control" name="password" id="password"
                                             value="" required>
@@ -81,7 +121,7 @@ $url = "index.php";
                                 <div class="col-12">
                                     <hr class="mt-5 mb-4 border-secondary-subtle">
                                     <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                        <a href="index.php" class="link-secondary text-decoration-none">Již mám účet</a>
+                                        <a href="register.php" class="link-secondary text-decoration-none">Vytvořit nový učet</a>
                                     </div>
                                 </div>
                             </div>
