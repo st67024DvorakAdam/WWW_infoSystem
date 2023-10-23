@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';        // Host
-$dbname = 'db';             // Nazev databáze na localu
-$user = 'root';             // Přihlašovací jméno k phpMyAdmin MySQL serveru
-$pass = '';                 // Heslo - defaultně žádné
+$host = 'localhost'; // Host
+$dbname = 'db'; // Nazev databáze na localu
+$user = 'root'; // Přihlašovací jméno k phpMyAdmin MySQL serveru
+$pass = ''; // Heslo - defaultně žádné
 
 
 // Připojení k DB pomocí PDO
@@ -22,9 +22,17 @@ $last_name = $_POST['last_name'];
 $email = $_POST['email'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $sex = $_POST['sex'];
-$phone_number = $_POST['phone_number'];
 $is_admin = 0;
-//$img_path = $_POST['img_path'];
+$phone_number = NULL;
+$img_path = NULL;
+
+if (isset($_POST['img_path']) && $_POST['img_path'] != NULL) {
+    $img_path = $_POST['img_path'];
+}
+
+if (isset($_POST['phone_number']) && $_POST['phone_number'] != NULL) {
+    $phone_number = $_POST['phone_number'];
+}
 
 try {
     $stmt = $conn->prepare("INSERT INTO user (first_name, last_name, email, password, sex, phone_number, is_administrator) VALUES (:first_name, :last_name, :email, :password, :sex, :phone_number, :is_administrator)");
@@ -40,7 +48,7 @@ try {
 
     $stmt->execute();
 
-    //header('Location: login.php');
+    header('Location: login.php');
     exit;
 
 } catch (PDOException $e) {
