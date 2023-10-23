@@ -31,7 +31,6 @@ Databáze
   - Odesílatel (uzivatel)
   - Příjemce (uzivatel)
   - Text 
-  - Obrázek (img)
   - Datum a čas (datetime)
   
 PHP
