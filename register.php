@@ -53,92 +53,71 @@ $url = "index.php";
                                 </div>
                             </div>
                             <form action="login_register.php" method="POST">
-                                <div class="row gy-3 gy-md-4 overflow-hidden">
-                                    <div class="col-12">
-                                        <label for="name" class="form-label">First name <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name"
-                                            placeholder="Jan" required>
-                                    </div>
-                                </div>
-
-
-                                <div class="row gy-3 gy-md-4 overflow-hidden">
-                                    <div class="col-12">
-                                        <label for="surname" class="form-label">Last name <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name"
-                                            placeholder="Novak" required>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <label for="gender" class="form-label">Gender</label>
-                                        <select class="form-select" name="sex" id="sex" required>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="row gy-3 gy-md-4 overflow-hidden">
-                                        <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="first_name" class="form-label">First name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="first_name" id="first_name"
+                                                placeholder="Jan" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="last_name" class="form-label">Last name <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="last_name" id="last_name"
+                                                placeholder="Novak" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="sex" class="form-label">Gender</label>
+                                            <select class="form-select" name="sex" id="sex" required>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="email" class="form-label">Email <span
                                                     class="text-danger">*</span></label>
                                             <input type="email" class="form-control" name="email" id="email"
                                                 placeholder="vasemail@priklad.com" required>
                                         </div>
-                                        <div class="col-12">
-                                            <label for="phone" class="form-label">Phone Number</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="phone_number" class="form-label">Phone Number</label>
                                             <input type="number" class="form-control" name="phone_number"
                                                 id="phone_number" placeholder="123456789">
                                         </div>
-                                        <div class="col-12">
-                                            <label for="profile-picture" class="form-label">Profile
-                                                Picture</label>
+                                        <div class="mb-3">
+                                            <label for="profile_picture" class="form-label">Profile Picture</label>
                                             <input type="file" class="form-control" name="profile_picture"
                                                 id="profile_picture">
                                         </div>
-                                        <div class="col-12">
+                                        <div class="mb-3">
                                             <label for="password" class="form-label">Password <span
                                                     class="text-danger">*</span></label>
                                             <input type="password" class="form-control" name="password" id="password"
-                                                value="" required>
+                                                required>
                                         </div>
-                                        <div class="col-12">
-                                            <label for="password" class="form-label">Password again <span
+                                        <div class="mb-3">
+                                            <label for="password_verify" class="form-label">Password again <span
                                                     class="text-danger">*</span></label>
                                             <input type="password" class="form-control" name="password_verify"
-                                                id="password_verify" value="" required>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value=""
-                                                    name="remember_me" id="remember_me">
-                                                <label class="form-check-label text-secondary" for="remember_me">
-                                                    Zapamatovat si mě
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-grid">
-                                                <button class="btn bsb-btn-xl btn-primary" type="submit">Přihlásit
-                                                    se</button>
-                                            </div>
+                                                id="password_verify" required>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <hr class="mt-5 mb-4 border-secondary-subtle">
-                                            <div
-                                                class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                                <a href="index.php" class="link-secondary text-decoration-none">Již
-                                                    máte vytvořený účet</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+                                    <label class="form-check-label" for="remember_me">Zapamatovat si mě</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Přihlásit se</button>
+                                <div class="mt-3">
+                                    <a href="index.php" class="link-secondary">Již máte vytvořený účet?</a>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
