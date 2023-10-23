@@ -48,7 +48,7 @@ try {
 
     $stmt->execute();
 
-    header('Location: login.php');
+   // header('Location: login.php');
     exit;
 
 } catch (PDOException $e) {
