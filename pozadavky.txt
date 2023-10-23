@@ -1,3 +1,8 @@
+index.php ...... login
+register.php ... registrace
+mainPage.php ... stránka s příspěvky/chaty/můj  ůčet/odhlásit
+
+
 Bootstrap
 - hned po otevření bude dostupná registrace a přihlášení
 - když se přihlásím, tak musím vidět nějakou nástěnku firemních akcí
