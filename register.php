@@ -47,7 +47,7 @@ $url = "index.php";
                                     </div>
                                 </div>
                             </div>
-                            <form action="login.php" method="post">
+                            <form action="login_register.php" method="post">
                                 <div class="row gy-3 gy-md-4 overflow-hidden">
                                     <div class="col-12">
                                         <label for="name" class="form-label">Name <span
@@ -70,7 +70,6 @@ $url = "index.php";
                     <select class="form-select" name="gender" id="gender" required>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                        <option value="prefer_not_to_say">Prefer Not to Say</option>
                     </select>
                 </div>
                             <form action="login.php" method="post">
