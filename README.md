@@ -1,0 +1,40 @@
+# WWW_infoSystem
+Bootstrap
+- hned po otevření bude dostupná registrace a přihlášení
+- když se přihlásím, tak musím vidět nějakou nástěnku firemních akcí
+- vpravo nahoře vidět jako kdo jsem přihlášen
+- uvidím odkaz na samostné okno s chatováním
+
+
+Databáze
+- Uživatel
+  - Jméno
+  - Příjmení
+  - Pohlaví
+  - Email
+  - telefonní číslo
+  - profilová fotografie
+  - login
+  - heslo
+  - jeAdmin
+
+- Příspěvek na nástěnce
+  - foto
+  - text
+  - datum přidání
+  - čas přidání 
+  - Uzivatel
+
+- Zpráva
+  - Odesílatel (uzivatel)
+  - Příjemce (uzivatel)
+  - Text 
+  - Obrázek (img)
+  - Datum a čas (datetime)
+  
+
+PHP
+- šifrovat heslo
+- kvůli gdpr šifrovat asi i mail a telefon
+- login musí být univerzální
+- musí být jeden admin
