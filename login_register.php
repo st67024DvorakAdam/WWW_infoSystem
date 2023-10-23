@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';        // Host
-$dbname = 'db';     // Nazev databáze na localu
+$dbname = 'db';             // Nazev databáze na localu
 $user = 'root';             // Přihlašovací jméno k phpMyAdmin MySQL serveru
 $pass = '';                 // Heslo - defaultně žádné
 
