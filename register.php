@@ -12,7 +12,7 @@ $url = "index.php";
 <html lang="en">
 
 <head>
-    <title>Bootstrap</title>
+    <title>INFOSYSTEM s r.o.</title>
     <!-- CSS Files -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.2/components/logins/login-5/assets/css/login-5.css" />
@@ -121,7 +121,7 @@ $url = "index.php";
                                 <div class="col-12">
                                     <hr class="mt-5 mb-4 border-secondary-subtle">
                                     <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-end">
-                                        <a href="register.php" class="link-secondary text-decoration-none">Vytvořit nový učet</a>
+                                        <a href="index.php" class="link-secondary text-decoration-none">Již máte vytvořený účet</a>
                                     </div>
                                 </div>
                             </div>
