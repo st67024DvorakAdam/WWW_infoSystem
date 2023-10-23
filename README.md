@@ -6,7 +6,7 @@ Bootstrap
 - uvidím odkaz na samostné okno s chatováním
 
 
-Databáze
+# Databáze
 - Uživatel
   - Jméno
   - Příjmení
@@ -33,7 +33,7 @@ Databáze
   - Datum a čas (datetime)
   
 
-PHP
+# PHP
 - šifrovat heslo
 - kvůli gdpr šifrovat asi i mail a telefon
 - login musí být univerzální
