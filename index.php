@@ -21,21 +21,54 @@ $url = "index.php";
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 </head>
+<style>
+    body, html {
+    height: 100%;
+    margin: 0;
+}
 
+body {
+        background-color: #2069f5;
+        background-size: cover; /* Nastaví obrázek tak, aby pokrýval celou plochu */
+        background-attachment: fixed; /* Umožní zafixovat pozadí, aby zůstalo viditelné při posouvání stránky */
+    }
+
+.card {
+    border: none;  /* Removes the border */
+    border-radius: 40px; /* Rounded corners with different values */
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+@media (max-width: 576px) {
+    section {
+        height: auto;
+        min-height: 100vh;
+    }
+}
+</style>
 <body>
     
-    <section class="p-3 p-md-4 p-xl-5" style="margin-top: 120px;">
+    <section class="p-3 p-md-4 p-xl-5" >
         <div class="container">
             <div class="card border-light-subtle shadow-sm">
                 <div class="row g-0">
-                    <div class="col-12 col-md-6 text-bg-primary">
+                    <div class="col-12 col-md-6 text-bg-primary" style="border-radius: 37px 0px 0px 37px;">
                         <div class="d-flex align-items-center justify-content-center h-100">
                             <div class="col-10 col-xl-8 py-3">
                                 <img class="img-fluid rounded mb-4" loading="lazy" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/c0840e59-db43-4681-ae7b-31a04dc4bc55/d7eqdvw-4e97ac92-e4b9-4498-9655-e4d612eb478b.png/v1/fill/w_1192,h_670/random_logo_by_criticl_d7eqdvw-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTAwIiwicGF0aCI6IlwvZlwvYzA4NDBlNTktZGI0My00NjgxLWFlN2ItMzFhMDRkYzRiYzU1XC9kN2VxZHZ3LTRlOTdhYzkyLWU0YjktNDQ5OC05NjU1LWU0ZDYxMmViNDc4Yi5wbmciLCJ3aWR0aCI6Ijw9MTYwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.X991O1jF5lTNZbbEoHEfoo6nlHEihBMHMIm5-uBCXcU" width="400" height="160"
                                     alt="">
                                 <hr class="border-primary-subtle mb-4">
                                 <h2 class="h1 mb-4">INFOSYSTEM</h2>
-                                <p class="lead m-0">Nějakej text</p>
+                                <p class="lead m-0">Jsme specializovanou firmou, která se zaměřuje na vývoj
+                                    a implementaci moderních informačních systémů a webových aplikací, které umožňují
+                                    efektivní správu dat a procesů pro naše klienty.</p>
                             </div>
                         </div>
                     </div>
@@ -44,17 +77,17 @@ $url = "index.php";
                             <div class="row">
                                 <div class="col-12">
                                     <div class="mb-5">
-                                        <h3>Log in</h3>
+                                        <h3>Přihlášení</h3>
                                     </div>
                                 </div>
                             </div>
-                            <form action="login.php" method="post">
+                            <form action="login_register.php" method="post">
                                 <div class="row gy-3 gy-md-4 overflow-hidden">
                                     <div class="col-12">
                                         <label for="email" class="form-label">Email <span
                                                 class="text-danger">*</span></label>
                                         <input type="email" class="form-control" name="email" id="email"
-                                            placeholder="vasemail@priklad.com" required>
+                                            placeholder="JanNovak@priklad.com" required>
                                     </div>
                                     <div class="col-12">
                                         <label for="password" class="form-label">Heslo <span
@@ -73,7 +106,7 @@ $url = "index.php";
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button class="btn bsb-btn-xl btn-primary" type="submit">Přihlásit se</button>
+                                            <button class="btn bsb-btn-xl btn-primary" type="submit" name="login">Přihlásit se</button>
                                         </div>
                                     </div>
                                 </div>
