@@ -35,8 +35,8 @@ try {
     $stmt->bindParam(':password', $password);
     $stmt->bindParam(':sex', $sex);
     $stmt->bindParam(':phone_number', $phone_number);
-    $stmt->bindParam(':isAdmin', $is_admin);
-    $stmt->bindParam(':img_path', $img_path);
+    $stmt->bindParam(':is_administrator', $is_admin);
+    //$stmt->bindParam(':img_path', $img_path);
 
     $stmt->execute();
 
