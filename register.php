@@ -35,7 +35,11 @@ $url = "index.php";
                                     width="400" height="160" alt="">
                                 <hr class="border-primary-subtle mb-4">
                                 <h2 class="h1 mb-4">INFOSYSTEM</h2>
-                                <p class="lead m-0">Nějakej text</p>
+                                <p class="lead m-0">
+                                    Jsme specializovanou firmou, která se zaměřuje na vývoj
+                                    a implementaci moderních informačních systémů a webových aplikací, které umožňují
+                                    efektivní správu dat a procesů pro naše klienty.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -44,7 +48,7 @@ $url = "index.php";
                             <div class="row">
                                 <div class="col-12">
                                     <div class="mb-5">
-                                        <h3>Registration</h3>
+                                        <h3>Registrace</h3>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +87,8 @@ $url = "index.php";
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="phone" class="form-label">Phone Number</label>
-                                                    <input type="number" class="form-control" name="phone_number" id="phone_number"
-                                                        placeholder="123456789">
+                                                    <input type="number" class="form-control" name="phone_number"
+                                                        id="phone_number" placeholder="123456789">
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="profile-picture" class="form-label">Profile
