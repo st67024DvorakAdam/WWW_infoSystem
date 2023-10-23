@@ -53,7 +53,7 @@ $url = "index.php";
                                     <div class="col-12">
                                         <label for="name" class="form-label">Name <span
                                                 class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" name="email" id="email"
+                                        <input type="email" class="form-control" name="first_name" id="first_name"
                                             placeholder="Jan" required>
                                     </div>
                                 </div>
@@ -63,12 +63,12 @@ $url = "index.php";
                                         <div class="col-12">
                                             <label for="surname" class="form-label">Surname <span
                                                     class="text-danger">*</span></label>
-                                            <input type="email" class="form-control" name="email" id="email"
+                                            <input type="email" class="form-control" name="last_name" id="last_name"
                                                 placeholder="Novak" required>
                                         </div>
                                         <div class="col-12">
                                             <label for="gender" class="form-label">Gender</label>
-                                            <select class="form-select" name="gender" id="gender" required>
+                                            <select class="form-select" name="sex" id="sex" required>
                                                 <option value="male">Male</option>
                                                 <option value="female">Female</option>
                                             </select>
@@ -83,14 +83,14 @@ $url = "index.php";
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="phone" class="form-label">Phone Number</label>
-                                                    <input type="tel" class="form-control" name="phone" id="phone"
+                                                    <input type="tel" class="form-control" name="phone_number" id="phone_number"
                                                         placeholder="123-456-7890">
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="profile-picture" class="form-label">Profile
                                                         Picture</label>
-                                                    <input type="file" class="form-control" name="profile-picture"
-                                                        id="profile-picture">
+                                                    <input type="file" class="form-control" name="profile_picture"
+                                                        id="profile_picture">
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="password" class="form-label">Password <span
@@ -101,8 +101,8 @@ $url = "index.php";
                                                 <div class="col-12">
                                                     <label for="password" class="form-label">Password again <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="password" class="form-control" name="password"
-                                                        id="password" value="" required>
+                                                    <input type="password" class="form-control" name="password_verify"
+                                                        id="password_verify" value="" required>
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-check">
