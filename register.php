@@ -53,7 +53,7 @@ $url = "index.php";
                                     <div class="col-12">
                                         <label for="name" class="form-label">First name <span
                                                 class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" name="first_name" id="first_name"
+                                        <input type="text" class="form-control" name="first_name" id="first_name"
                                             placeholder="Jan" required>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@ $url = "index.php";
                                         <div class="col-12">
                                             <label for="surname" class="form-label">Last name <span
                                                     class="text-danger">*</span></label>
-                                            <input type="email" class="form-control" name="last_name" id="last_name"
+                                            <input type="text" class="form-control" name="last_name" id="last_name"
                                                 placeholder="Novak" required>
                                         </div>
                                         <div class="col-12">
@@ -83,8 +83,8 @@ $url = "index.php";
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="phone" class="form-label">Phone Number</label>
-                                                    <input type="tel" class="form-control" name="phone_number" id="phone_number"
-                                                        placeholder="123-456-7890">
+                                                    <input type="number" class="form-control" name="phone_number" id="phone_number"
+                                                        placeholder="123456789">
                                                 </div>
                                                 <div class="col-12">
                                                     <label for="profile-picture" class="form-label">Profile
