@@ -23,11 +23,11 @@ $email = $_POST['email'];
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $sex = $_POST['sex'];
 $phone_number = $_POST['phone_number'];
-$is_admin = $_POST['isAdmin'];
-$img_path = $_POST['img_path'];
+$is_admin = 0;
+//$img_path = $_POST['img_path'];
 
 try {
-    $stmt = $conn->prepare("INSERT INTO user (first_name, last_name, email, password, sex, phone_number, isAdmin, img_path) VALUES (:first_name, :last_name, :email, :password, :sex, :phone_number, :isAdmin, :img_path)");
+    $stmt = $conn->prepare("INSERT INTO user (first_name, last_name, email, password, sex, phone_number, is_administrator) VALUES (:first_name, :last_name, :email, :password, :sex, :phone_number, :is_administrator)");
 
     $stmt->bindParam(':first_name', $first_name);
     $stmt->bindParam(':last_name', $last_name);
