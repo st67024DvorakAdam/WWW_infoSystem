@@ -150,7 +150,7 @@ section {
                                     <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
                                     <label class="form-check-label" for="remember_me">Zapamatovat si mě</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary" name="register">Přihlásit se</button>
+                                <button type="submit" class="btn btn-primary" name="register">Zaregistrovat</button>
                                 <div class="mt-3">
                                     <a href="index.php" class="link-secondary">Již máte vytvořený účet?</a>
                                 </div>
