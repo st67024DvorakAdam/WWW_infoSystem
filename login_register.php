@@ -27,18 +27,19 @@ if (isset($_POST["register"])) {
     $is_admin = 0;
     $phone_number = NULL;
     $img_path = NULL;
-
-    // když není vybranej obrázek nebo číslo - zůstanou null i v db
-    if (isset($_POST['img_path']) && $_POST['img_path'] != NULL) {
-        $img_path = $_POST['img_path'];
+//kontrola nahrani obrazku
+   if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] === 0) {
+        $image = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+    } else {
+        // Chyba při nahrávání souboru nebo soubor nebyl vybrán
+        $image = null; // Nastavte obrázek na NULL, pokud se nahrávání nezdařilo
     }
-
     if (isset($_POST['phone_number']) && $_POST['phone_number'] != NULL) {
         $phone_number = $_POST['phone_number'];
     }
 
     try {
-        $stmt = $conn->prepare("INSERT INTO user (first_name, last_name, email, password, sex, phone_number, is_administrator) VALUES (:first_name, :last_name, :email, :password, :sex, :phone_number, :is_administrator)");
+        $stmt = $conn->prepare("INSERT INTO user (first_name, last_name, email, password, sex, phone_number, is_administrator, img) VALUES (:first_name, :last_name, :email, :password, :sex, :phone_number, :is_administrator, :img)");
 
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
@@ -47,11 +48,12 @@ if (isset($_POST["register"])) {
         $stmt->bindParam(':sex', $sex);
         $stmt->bindParam(':phone_number', $phone_number);
         $stmt->bindParam(':is_administrator', $is_admin);
-        // TODO
-        //$stmt->bindParam(':img_path', $img_path);
-        //header('Location: profile.php');
-
+        $stmt->bindParam(':img', $image, PDO::PARAM_LOB);
+     
+        
         $stmt->execute();
+       // TODO: vytvořit session
+       // header('Location: account.php');
         exit;
     } catch (PDOException $e) {
         echo "Chyba: " . $e->getMessage();
