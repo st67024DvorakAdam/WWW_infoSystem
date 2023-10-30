@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $host = 'localhost'; // Host
 $dbname = 'db'; // Nazev databáze na localu
 $user = 'root'; // Přihlašovací jméno k phpMyAdmin MySQL serveru
@@ -51,11 +53,9 @@ if (isset($_POST["register"])) {
 
         $stmt->execute();
         exit;
-
     } catch (PDOException $e) {
         echo "Chyba: " . $e->getMessage();
     }
-
 } elseif (isset($_POST["login"])) {
     $login_email = $_POST['email'];
     $login_password = $_POST['password'];
@@ -68,16 +68,12 @@ if (isset($_POST["register"])) {
 
         if ($user && password_verify($login_password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            header('Location: register.php');
+            header('Location: posts.php');
             exit();
-            
         } else {
             echo "Nesprávné přihlašovací údaje.";
         }
     } catch (PDOException $e) {
         echo "Chyba: " . $e->getMessage();
     }
-
 }
-
-?>
