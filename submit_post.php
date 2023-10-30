@@ -3,11 +3,11 @@
 session_start();
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-}else {
-   
+} else {
     header('Location: index.php'); // Přesměrování na přihlašovací stránku
     exit;
 }
+
 $host = 'localhost';
 $dbname = 'db';
 $user = 'root';
@@ -24,10 +24,9 @@ try {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Získání dat z formuláře
     $post_text = $_POST["post_text"];
-    
 
-    // Zpracování nahrávaného obrázku
-    if (isset($_FILES["post_image"])) {
+    // Zpracování nahrávaného obrázku, pokud byl vybrán
+    if (isset($_FILES["post_image"]) && $_FILES["post_image"]["size"] > 0) {
         $post_image = file_get_contents($_FILES["post_image"]["tmp_name"]);
     } else {
         $post_image = null;
@@ -37,13 +36,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $post_date = date("Y-m-d H:i:s");
 
     // Vložení dat do databáze
+    if ($post_image === null) {
+        $post_image = ''; // Nastavit prázdný řetězec pro sloupce typu TEXT
+    }
     $stmt = $conn->prepare("INSERT INTO Post (img, text, postDateTime, user_id) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$post_image, $post_text,  $post_date, $user_id]);
-
-    
+    $stmt->execute([$post_image, $post_text, $post_date, $user_id]);
 }
-$url = "http://localhost/WWW_infoSystem-main/posts.php"; 
-$cas = 0; 
+
+$url = "http://localhost/WWW_infoSystem-main/posts.php";
+$cas = 0;
 
 echo "<meta http-equiv='refresh' content='{$cas};url={$url}'>";
 
