@@ -24,12 +24,61 @@
         background-attachment: fixed;
     }
 
+    
+
+    /* Bílý pruh ve středu stránky */
+    .center-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 30px auto;
+        max-width: 800px;
+        height: 100vh; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+       
+    }
+
+    /* Bílé tlačítko */
+    .white-button {
+        background-color: #2069f5; /* Modrá barva */
+        color: white; /* Bílý text */
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+        border-radius: 20px;
+        padding: 10px 15px;
+        cursor: pointer;
+        margin-top: auto;
+        text-align: center; /* Zarovnání textu na střed */
+        position: sticky;
+        bottom: 10%;
+        left: 45%;
+    }
+
+    .white-button:hover {
+        background-color: white; /* Bílé pozadí při najetí myší */
+        color: #2069f5; /* Modrý text při najetí myší */
+    }
+
+    /* Zarovnání tlačítka doprava */
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 40px;
+    }
+
+    /* Barva textu pro odkaz "Příspěvky" */
+    .nav-link[href="posts.php"] {
+        font-weight: bold;
+    }
     .navbar {
         background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Zvětšený stín */
+        border-radius: 0; /* Ostré rohy */
     }
 
     .navbar-brand {
         font-size: 24px;
+        font-weight: bold;
     }
 
     .navbar-nav .nav-item {
@@ -43,32 +92,7 @@
     .navbar-toggler-icon {
         background-color: #2069f5;
     }
-
-    /* Bílý pruh ve středu stránky */
-    .center-container {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        margin: 30px auto;
-        max-width: 800px;
-    }
-
-    /* Bílé tlačítko */
-    .white-button {
-        background-color: #fff;
-        color: #2069f5;
-        border: none;
-        border-radius: 20px;
-        padding: 10px 20px;
-        cursor: pointer;
-    }
-
-    /* Zarovnání tlačítka doprava */
-    .button-container {
-        display: flex;
-        justify-content: flex-end;
-        margin-right: 40px;
-    }
+    
 </style>
 
 <body>
@@ -107,10 +131,9 @@
         <p>Toto je bílý pruh uprostřed stránky, kde můžete umístit další obsah.</p>
     </div>
 
-    <!-- Bílé tlačítko zarovnané doprava mezi okrajem celé stránky a pravým okrajem bílého kontejneru -->
-    <div class="button-container">
-        <button class="white-button">+ Přidat příspěvek</button>
-    </div>
+    <!-- Tlačítko vedle center kontejneru -->
+    <button class="white-button">+ Přidat příspěvek</button>
+</div>
 
 </body>
 
