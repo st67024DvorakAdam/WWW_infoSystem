@@ -68,7 +68,7 @@ if (isset($_POST["register"])) {
 
         if ($user && password_verify($login_password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
-            header('Location: register.php');
+            header('Location: posts.php');
             exit();
             
         } else {
