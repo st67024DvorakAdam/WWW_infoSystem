@@ -84,16 +84,16 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="prispevky.php">Příspěvky</a>
+                        <a class="nav-link" href="posts.php">Příspěvky</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="chat.php">Chaty</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="muj_ucet.php">Můj Účet</a>
+                        <a class="nav-link" href="acount.php">Můj Účet</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="odhlasit.php">Odhlásit</a>
+                        <a class="nav-link" href="index.php">Odhlásit</a>
                     </li>
                 </ul>
             </div>
