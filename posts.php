@@ -222,9 +222,11 @@ if ($result->rowCount() > 0) {
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="picture">
-            <img alt="Image" src="data:image/jpeg;base64,<?= base64_encode($imgData) ?>" style="width: 100%; height: 100%;">
-        </div>
+        <?php if ($imgData != null) { ?>
+            <div class="picture">
+                <img alt="Image" src="data:image/jpeg;base64,<?= base64_encode($imgData) ?>" style="width: 100%; height: 100%;">
+            </div>
+        <?php } ?>
     </div>
 </div>
 
