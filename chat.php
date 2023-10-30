@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    // Uživatel není přihlášen, takže zrušíme jeho relaci
+    session_destroy();
+
+    // Přesměrujte ho na stránku odhlášení nebo jinou vhodnou stránku
+    header('Location: logout.php'); 
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,7 +134,7 @@
                         <a class="nav-link" href="account.php">Můj Účet</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Odhlásit</a>
+                        <a class="nav-link" href="logout.php">Odhlásit</a>
                     </li>
                 </ul>
             </div>
