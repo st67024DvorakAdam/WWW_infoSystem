@@ -121,7 +121,7 @@ width: 100%;
                         <a class="nav-link" href="chat.php">Chaty</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="acount.php">Můj Účet</a>
+                        <a class="nav-link" href="account.php">Můj Účet</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php">Odhlásit</a>
