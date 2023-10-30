@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Počítač: 127.0.0.1:3306
--- Vytvořeno: Pon 23. říj 2023, 19:46
--- Verze serveru: 8.0.31
--- Verze PHP: 8.0.26
+-- Počítač: 127.0.0.1
+-- Vytvořeno: Pon 30. říj 2023, 14:19
+-- Verze serveru: 10.4.28-MariaDB
+-- Verze PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,76 +24,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `message`
---
-
-DROP TABLE IF EXISTS `message`;
-CREATE TABLE IF NOT EXISTS `message` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `sender_id` int UNSIGNED NOT NULL,
-  `receiver_id` int UNSIGNED NOT NULL,
-  `text` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `messageDateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `sender_id` (`sender_id`),
-  KEY `receiver_id` (`receiver_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Struktura tabulky `post`
 --
 
-DROP TABLE IF EXISTS `post`;
-CREATE TABLE IF NOT EXISTS `post` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `img_path` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `text` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `postDateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user_id` int UNSIGNED NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+CREATE TABLE `post` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `img` blob NOT NULL,
+  `text` varchar(1024) NOT NULL,
+  `postDateTime` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `user_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Struktura tabulky `user`
+-- Indexy pro exportované tabulky
 --
 
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `sex` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `phone_number` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `password` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `is_administrator` tinyint(1) NOT NULL DEFAULT '0',
-  `img_path` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `register_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+--
+-- Indexy pro tabulku `post`
+--
+ALTER TABLE `post`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
--- Vypisuji data pro tabulku `user`
+-- AUTO_INCREMENT pro tabulky
 --
 
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `sex`, `email`, `phone_number`, `password`, `is_administrator`, `img_path`, `register_date`) VALUES
-(11, 'David', 'Kokot', 'male', 'davidecekcz@gmail.com', NULL, '$2y$10$qWGLeW63eldKZ8TS1n9aveIE7NlthSwgkvQ793JfcIHuZP84lSIha', 0, NULL, '2023-10-23 20:40:03');
+--
+-- AUTO_INCREMENT pro tabulku `post`
+--
+ALTER TABLE `post`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Omezení pro exportované tabulky
 --
-
---
--- Omezení pro tabulku `message`
---
-ALTER TABLE `message`
-  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Omezení pro tabulku `post`
