@@ -87,7 +87,7 @@
                         <a class="nav-link" href="prispevky.php">Příspěvky</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="chaty.php">Chaty</a>
+                        <a class="nav-link" href="chat.php">Chaty</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="muj_ucet.php">Můj Účet</a>
