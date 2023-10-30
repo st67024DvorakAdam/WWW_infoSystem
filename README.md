@@ -16,13 +16,13 @@ Databáze
   - phone_number
   - password
   - isAdmin
-  - img_path
+  - img
   - register_date
     
 
 - user_post
   - id
-  - img_path
+  - img
   - text
   - postDateTime
   - user_id
