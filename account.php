@@ -89,24 +89,24 @@
                         <a class="nav-link" href="account.php">Můj Účet</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Odhlásit</a>
+                        <a class="nav-link" href="logout.php">Odhlásit</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="center-container">
-        <h1>Informace o mém účtu</h1>
-        <div id="account-info">
-            <img src="" alt="Profilová fotka" id="profile_picture">
-            <p><strong>Jméno:</strong> <span id="first_name"></span></p>
-            <p><strong>Příjmení:</strong> <span id="last_name"></span></p>
-            <p><strong>Telefonní číslo:</strong> <span id="phone_number"></span></p>
-            <p><strong>Email:</strong> <span id="email"></span></p>
-            <p><strong>Pohlaví:</strong> <span id="sex"></span></p>
-            <p><strong>Datum a čas registrace:</strong> <span id="register_date"></span></p>
-        </div>
+    <h1>Informace o mém účtu</h1>
+    <div id="account-info">
+        <img alt="Profilová fotka" id="profile_picture" src="" /> <!-- Image tag with an empty src -->
+        <p><strong>Jméno:</strong> <span id="first_name"></span></p>
+        <p><strong>Příjmení:</strong> <span id="last_name"></span></p>
+        <p><strong>Telefonní číslo:</strong> <span id="phone_number"></span></p>
+        <p><strong>Email:</strong> <span id="email"></span></p>
+        <p><strong>Pohlaví:</strong> <span id="sex"></span></p>
+        <p><strong>Datum a čas registrace:</strong> <span id="register_date"></span></p>
     </div>
+</div>
 </body>
 
 </html>
@@ -129,7 +129,7 @@ try {
     die("Nepodařilo se připojit k databázi: " . $e->getMessage());
 }
 // Your SQL query and data retrieval code here
-$sql = "SELECT first_name, last_name, phone_number, email, sex, register_date, img_path FROM user WHERE id = :user_id";
+$sql = "SELECT first_name, last_name, phone_number, email, sex, register_date, img FROM user WHERE id = :user_id";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
@@ -146,7 +146,10 @@ if ($stmt->rowCount() > 0) {
             document.getElementById('email').innerText = '{$row['email']}';
             document.getElementById('sex').innerText = '{$row['sex']}';
             document.getElementById('register_date').innerText = '{$row['register_date']}';
-            document.getElementById('img_path').src = '{$row['img_path']}';
+
+            // Load the image from the database BLOB
+            var img = document.getElementById('profile_picture');
+            img.src = 'data:image/jpeg;base64," . base64_encode($row['img']) . "';
           </script>";
 } else {
     echo "Uživatel nebyl nalezen";
