@@ -26,17 +26,20 @@ if (isset($_POST["register"])) {
     $sex = $_POST['sex'];
     $is_admin = 0;
     $phone_number = NULL;
-    $img_path = NULL;
+    $img = NULL;
 //kontrola nahrani obrazku
-   if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["error"] === 0) {
-        $image = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+if (isset($_FILES["profile_picture"])) {
+    if ($_FILES["profile_picture"]["error"] === 0) {
+        // Soubor byl nahrán, můžete jej zpracovat
+        $img = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
     } else {
-        // Chyba při nahrávání souboru nebo soubor nebyl vybrán
-        $image = null; // Nastavte obrázek na NULL, pokud se nahrávání nezdařilo
+        // Chyba při nahrávání souboru
+        $img = NULL;
     }
-    if (isset($_POST['phone_number']) && $_POST['phone_number'] != NULL) {
-        $phone_number = $_POST['phone_number'];
-    }
+} else {
+    // Pole neexistuje, znamená to, že nebyl vybrán soubor
+    $img = null;
+}
 
     try {
         $stmt = $conn->prepare("INSERT INTO user (first_name, last_name, email, password, sex, phone_number, is_administrator, img) VALUES (:first_name, :last_name, :email, :password, :sex, :phone_number, :is_administrator, :img)");
@@ -48,7 +51,7 @@ if (isset($_POST["register"])) {
         $stmt->bindParam(':sex', $sex);
         $stmt->bindParam(':phone_number', $phone_number);
         $stmt->bindParam(':is_administrator', $is_admin);
-        $stmt->bindParam(':img', $image, PDO::PARAM_LOB);
+        $stmt->bindParam(':img', $img, PDO::PARAM_LOB);
      
         
         $stmt->execute();
