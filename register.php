@@ -117,7 +117,7 @@ $url = "index.php";
                                 </div>
                             </div>
                         </div>
-                        <form action="login_register.php" method="POST">
+                        <form action="login_register.php" method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
