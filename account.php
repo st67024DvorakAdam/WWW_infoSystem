@@ -22,6 +22,12 @@
             background-attachment: fixed;
         }
 
+        img {
+            width: 225px;
+            height: 225px;
+            border: 2px solid black;
+        }
+
         .navbar {
             background-color: #fff;
         }
@@ -96,22 +102,28 @@
         </div>
     </nav>
     <div class="center-container">
-    <h1>Informace o mém účtu</h1>
-    <div id="account-info">
-        <img alt="Profilová fotka" id="profile_picture" src="" /> <!-- Image tag with an empty src -->
-        <p><strong>Jméno:</strong> <span id="first_name"></span></p>
-        <p><strong>Příjmení:</strong> <span id="last_name"></span></p>
-        <p><strong>Telefonní číslo:</strong> <span id="phone_number"></span></p>
-        <p><strong>Email:</strong> <span id="email"></span></p>
-        <p><strong>Pohlaví:</strong> <span id="sex"></span></p>
-        <p><strong>Datum a čas registrace:</strong> <span id="register_date"></span></p>
+        <h1>Informace o mém účtu</h1>
+        <div id="account-info">
+            <img alt="Profilová fotka" id="profile_picture" /> <!-- Image tag with an empty src -->
+            <p><strong>Jméno:</strong> <span id="first_name"></span></p>
+            <p><strong>Příjmení:</strong> <span id="last_name"></span></p>
+            <p><strong>Telefonní číslo:</strong> <span id="phone_number"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Pohlaví:</strong> <span id="sex"></span></p>
+            <p><strong>Datum a čas registrace:</strong> <span id="register_date"></span></p>
+        </div>
     </div>
-</div>
 </body>
 
 </html>
 <?php
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Uživatel není přihlášen, takže zobrazíme alert a přesměrujeme ho po potvrzení
+    echo '<script>alert("Uživatel není přihlášen");</script>';
+    echo '<script>window.location = "logout.php";</script>';
+    exit;
+}
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
@@ -147,12 +159,22 @@ if ($stmt->rowCount() > 0) {
             document.getElementById('sex').innerText = '{$row['sex']}';
             document.getElementById('register_date').innerText = '{$row['register_date']}';
 
-            // Load the image from the database BLOB
+            // Load the image from the database BLOB or set a default image
             var img = document.getElementById('profile_picture');
-            img.src = 'data:image/jpeg;base64," . base64_encode($row['img']) . "';
+            img.src = " . ($row['img'] ? "'data:image/jpeg;base64," . base64_encode($row['img']) . "'" : getImagePathBasedOnGender($row['sex'])) . ";
           </script>";
 } else {
     echo "Uživatel nebyl nalezen";
+}
+function getImagePathBasedOnGender($gender)
+{
+    if ($gender === 'female') {
+        return "'pictures/profile_picture_woman.jpg'";
+    } elseif ($gender === 'male') {
+        return "'pictures/profile_picture_man.jpg'";
+    } else {
+        return "'pictures/default_profile_picture.jpg'";
+    }
 }
 $conn = null; // Uzavření PDO spojení
 
