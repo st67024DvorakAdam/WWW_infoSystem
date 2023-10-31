@@ -1,11 +1,7 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['user_id'])) {
-    // Uživatel není přihlášen, takže zrušíme jeho relaci
     session_destroy();
-
-    // Přesměrujte ho na stránku odhlášení nebo jinou vhodnou stránku
     header('Location: logout.php'); 
     exit;
 }

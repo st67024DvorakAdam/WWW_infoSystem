@@ -27,19 +27,19 @@ if (isset($_POST["register"])) {
     $is_admin = 0;
     $phone_number = NULL;
     $img = NULL;
-//kontrola nahrani obrazku
-if (isset($_FILES["profile_picture"])) {
-    if ($_FILES["profile_picture"]["error"] === 0) {
-        // Soubor byl nahrán, můžete jej zpracovat
-        $img = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+    //kontrola nahrani obrazku
+    if (isset($_FILES["profile_picture"])) {
+        if ($_FILES["profile_picture"]["error"] === 0) {
+            // Soubor byl nahrán, můžete jej zpracovat
+            $img = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+        } else {
+            // Chyba při nahrávání souboru
+            $img = NULL;
+        }
     } else {
-        // Chyba při nahrávání souboru
-        $img = NULL;
+        
+        $img = null;
     }
-} else {
-    // Pole neexistuje, znamená to, že nebyl vybrán soubor
-    $img = null;
-}
 
     try {
         $stmt = $conn->prepare("INSERT INTO user (first_name, last_name, email, password, sex, phone_number, is_administrator, img) VALUES (:first_name, :last_name, :email, :password, :sex, :phone_number, :is_administrator, :img)");
@@ -52,11 +52,15 @@ if (isset($_FILES["profile_picture"])) {
         $stmt->bindParam(':phone_number', $phone_number);
         $stmt->bindParam(':is_administrator', $is_admin);
         $stmt->bindParam(':img', $img, PDO::PARAM_LOB);
-     
-        
+
+
         $stmt->execute();
-       // TODO: vytvořit session
-       // header('Location: account.php');
+        $user_id = $conn->lastInsertId();
+
+        session_start();
+        $_SESSION['user_id'] = $user_id;
+
+        header('Location: posts.php');
         exit;
     } catch (PDOException $e) {
         echo "Chyba: " . $e->getMessage();
