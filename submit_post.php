@@ -43,10 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute([$post_image, $post_text, $post_date, $user_id]);
 }
 
-$url = "http://localhost/WWW_infoSystem-main/posts.php";
-$cas = 0;
-
-echo "<meta http-equiv='refresh' content='{$cas};url={$url}'>";
+header("Location: posts.php");
 
 // Uzavření připojení k databázi
 $conn = null;
