@@ -1,22 +1,60 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['user_id'])) {
+ // Uživatel není přihlášen, takže zrušíme jeho relaci
     session_destroy();
-    header('Location: logout.php'); 
+    // Přesměrujte ho na stránku odhlášení nebo jinou vhodnou stránku
+
+    header('Location: logout.php');
     exit;
 }
+
+$host = 'localhost';
+$dbname = 'db';
+$user = 'root';
+$pass = '';
+
+$conn = new mysqli($host, $user, $pass, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+// Zkontrolujeme, zda byl formulář odeslán pomocí HTTP POST metody
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    $sender_id = $_SESSION['user_id'];
+    $receiver_id = $_POST['receiver_id'];
+    $text = $_POST['text'];
+    $messageDateTime = date('Y-m-d H:i:s');
+
+    $sql = "INSERT INTO message (sender_id, receiver_id, text, messageDateTime) VALUES ('$sender_id', '$receiver_id', '$text', '$messageDateTime')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Zpráva byla úspěšně odeslána
+        echo "Zpráva byla úspěšně odeslána.";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+}
+// Získání ID přihlášeného uživatele
+$user_id = $_SESSION['user_id'];
+
+// Získání všech zpráv pro přihlášeného uživatele jako příjemce
+$sql = "SELECT * FROM message WHERE receiver_id = '$user_id'";
+$result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <title>Infosystém</title>
-
     <!-- CSS Files -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.2/components/logins/login-5/assets/css/login-5.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" data-no-delete="yes" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</head>
 
 <style>
     body,
@@ -108,10 +146,8 @@ if (!isset($_SESSION['user_id'])) {
         background-color: #2069f5;
     }
 </style>
-
+</
 <body>
-
-    <!-- Navigační bar -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">Infosystém</a>
@@ -137,17 +173,44 @@ if (!isset($_SESSION['user_id'])) {
         </div>
     </nav>
 
-    <!-- Bílý pruh ve středu stránky -->
+    
+
+    <!-- Formulář pro odeslání zprávy -->
     <div class="center-container">
-        <!-- Zde můžete umístit další obsah nebo kontejnery -->
-        <h2>Vítejte ve vašem Infosystému</h2>
-        <p>Toto je bílý pruh uprostřed stránky, kde můžete umístit další obsah.</p>
+        <form method="post" action="">
+            <div class="form-group">
+                <label for="receiver_id">ID příjemce:</label>
+                <input type="text" class="form-control" id="receiver_id" name="receiver_id" required>
+            </div>
+            <div class="form-group">
+                <label for="text">Text zprávy:</label>
+                <textarea class="form-control" id="text" name="text" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Odeslat zprávu</button>
+        </form>
+    </div>
+   <!-- Zobrazování zpráv na stránce -->
+   <div class="center-container">
+        <?php
+        if ($result->num_rows > 0) {
+            // Výpis všech zpráv
+            while ($row = $result->fetch_assoc()) {
+                echo "<div class='message'>";
+                echo "<p>Sender: " . $row['sender_id'] . "</p>";
+                echo "<p>Text: " . $row['text'] . "</p>";
+                echo "<p>Date: " . $row['messageDateTime'] . "</p>";
+                echo "</div>";
+                echo "<p>______________________________________________</p>";
+            }
+        } else {
+            echo "<p>Žádné zprávy nebyly nalezeny.</p>";
+        }
+        ?>
     </div>
 
-    <!-- Tlačítko vedle center kontejneru -->
-    <button class="white-button">+ Přidat příspěvek</button>
-    </div>
-
+    
 </body>
-
+<?php
+$conn->close();
+?>
 </html>

@@ -125,7 +125,7 @@ if (!isset($_SESSION['user_id'])) {
 
 </html>
 <?php
-session_start();
+
 if (!isset($_SESSION['user_id'])) {
     // Uživatel není přihlášen, takže zobrazíme alert a přesměrujeme ho po potvrzení
     echo '<script>alert("Uživatel není přihlášen");</script>';
