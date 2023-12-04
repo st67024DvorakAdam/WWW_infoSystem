@@ -17,14 +17,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $user_id = $_SESSION['user_id'];
+        $img = NULL;
+
+        if (isset($_FILES["profile_picture"])) {
+            if ($_FILES["profile_picture"]["error"] === 0) {
+                $img = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+            }
+        }
 
         $sql = "UPDATE user SET 
             first_name = :first_name,
             last_name = :last_name,
             phone_number = :phone_number,
             email = :email,
-            sex = :sex
-            WHERE id = :user_id";
+            sex = :sex";
+
+        if ($img !== NULL) {
+            $sql .= ", img = :img";
+        }
+
+        $sql .= " WHERE id = :user_id";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':first_name', $_POST['edit_first_name']);
@@ -33,16 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':email', $_POST['edit_email']);
         $stmt->bindParam(':sex', $_POST['sex']);
         $stmt->bindParam(':user_id', $user_id);
+        if ($img !== NULL) {
+            $stmt->bindParam(':img', $img, PDO::PARAM_LOB);
+        }
+
+        $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
 
-        if ($_FILES['edit_profile_picture']['size'] > 0) {
-            $imgData = file_get_contents($_FILES['edit_profile_picture']['tmp_name']);
-            $sql = "UPDATE user SET img = :img WHERE id = :user_id";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':img', $imgData, PDO::PARAM_LOB);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->execute();
-        }
 
         header('Location: account.php');
         exit;

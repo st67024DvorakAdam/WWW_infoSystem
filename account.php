@@ -198,16 +198,16 @@ if ($stmt->rowCount() > 0) {
                 <div class="mb-3">
                     <label for="sex_edit" class="form-label">Pohlaví</label>
                     <select class="form-select" name="sex" id="sex_edit">
-                        <option value="male">muž</option>
-                        <option value="female">žena</option>
-                        <option value="other">ostatní</option>
+                        <option value="male" <?php echo ($row['sex'] === 'male') ? 'selected' : ''; ?>>muž</option>
+                        <option value="female" <?php echo ($row['sex'] === 'female') ? 'selected' : ''; ?>>žena</option>
+                        <option value="other" <?php echo ($row['sex'] === 'other') ? 'selected' : ''; ?>>ostatní</option>
                     </select>
                 </div>
 
 
                 <div class="mb-3">
-                    <label for="profile_picture" class="form-label">Profilová fotka</label>
-                    <input type="file" class="form-control" name="profile_picture" id="profile_picture">
+                    <label for="edit_profile_picture" class="form-label">Profilová fotka</label>
+                    <input type="file" class="form-control" name="profile_picture" id="edit_profile_picture">
                 </div>
 
                 <p><button type="submit" class="white-button">Uložit změny</button>
