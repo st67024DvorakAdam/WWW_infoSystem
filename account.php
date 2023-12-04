@@ -34,16 +34,6 @@ if ($stmt->rowCount() > 0) {
 
 
     echo "<script>
-            document.getElementById('first_name').innerText = '{$row['first_name']}';
-            document.getElementById('last_name').innerText = '{$row['last_name']}';
-            document.getElementById('phone_number').innerText = '{$row['phone_number']}';
-            document.getElementById('email').innerText = '{$row['email']}';
-            document.getElementById('sex').innerText = '{$row['sex']}';
-            document.getElementById('register_date').innerText = '{$row['register_date']}';
-
-            var img = document.getElementById('profile_picture');
-            img.src = " . ($row['img'] ? "'data:image/jpeg;base64," . base64_encode($row['img']) . "'" : getImagePathBasedOnGender($row['sex'])) . ";
-
             document.getElementById('edit_first_name').innerText = '{$row['first_name']}';
             document.getElementById('edit_last_name').innerText = '{$row['last_name']}';
             document.getElementById('edit_phone_number').innerText = '{$row['phone_number']}';
@@ -206,8 +196,8 @@ if ($stmt->rowCount() > 0) {
 
 
                 <div class="mb-3">
-                    <label for="sex" class="form-label">Pohlaví</label>
-                    <select class="form-select" name="sex" id="sex">
+                    <label for="sex_edit" class="form-label">Pohlaví</label>
+                    <select class="form-select" name="sex" id="sex_edit">
                         <option value="male">muž</option>
                         <option value="female">žena</option>
                         <option value="other">ostatní</option>
@@ -268,23 +258,28 @@ if ($stmt->rowCount() > 0) {
             document.getElementById('last_name').innerText = '{$row['last_name']}';
             document.getElementById('phone_number').innerText = '{$row['phone_number']}';
             document.getElementById('email').innerText = '{$row['email']}';
-            document.getElementById('sex').innerText = '{$row['sex']}';
+            document.getElementById('sex').innerText = '" . getGenderDisplayName($row['sex']) . "';
             document.getElementById('register_date').innerText = '{$row['register_date']}';
 
             var img = document.getElementById('profile_picture');
             img.src = " . ($row['img'] ? "'data:image/jpeg;base64," . base64_encode($row['img']) . "'" : getImagePathBasedOnGender($row['sex'])) . ";
 
-            document.getElementById('edit_first_name').innerText = '{$row['first_name']}';
-            document.getElementById('edit_last_name').innerText = '{$row['last_name']}';
-            document.getElementById('edit_phone_number').innerText = '{$row['phone_number']}';
-            document.getElementById('edit_email').innerText = '{$row['email']}';
-            document.getElementById('edit_sex').innerText = '{$row['sex']}';
-
-            var img = document.getElementById('edit_profile_picture');
-            img.src = " . ($row['img'] ? "'data:image/jpeg;base64," . base64_encode($row['img']) . "'" : getImagePathBasedOnGender($row['sex'])) . ";
-          </script>";
+            </script>";
 } else {
     echo "Uživatel nebyl nalezen";
+}
+function getGenderDisplayName($gender)
+{
+    switch ($gender) {
+        case 'male':
+            return 'muž';
+        case 'female':
+            return 'žena';
+        case 'other':
+            return 'ostatní';
+        default:
+            return 'neznámé';
+    }
 }
 
 function getImagePathBasedOnGender($gender)

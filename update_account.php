@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':last_name', $_POST['edit_last_name']);
         $stmt->bindParam(':phone_number', $_POST['edit_phone_number']);
         $stmt->bindParam(':email', $_POST['edit_email']);
-        $stmt->bindParam(':sex', $_POST['edit_sex']);
+        $stmt->bindParam(':sex', $_POST['sex']);
         $stmt->bindParam(':user_id', $user_id);
         $stmt->execute();
 
