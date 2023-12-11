@@ -20,6 +20,45 @@ try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
+    echo "Chyba připojení: " . $e->getMessage();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
+    $current_password = $_POST['current_password'];
+    $new_password = $_POST['new_password'];
+    $confirm_password = $_POST['confirm_password'];
+
+    
+    $stmt_check_password = $conn->prepare("SELECT password FROM user WHERE id = :user_id");
+    $stmt_check_password->bindParam(':user_id', $user_id);
+    $stmt_check_password->execute();
+    $row_check_password = $stmt_check_password->fetch();
+
+
+    
+        
+
+    if (password_verify($current_password, $row_check_password['password'])) {
+        if ($new_password == $confirm_password) {
+            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $sql_update_password = "UPDATE user SET password = :password WHERE id = :user_id";
+            $stmt_update_password = $conn->prepare($sql_update_password);
+            $stmt_update_password->bindParam(':password', $hashed_password);
+            $stmt_update_password->bindParam(':user_id', $user_id);
+            $stmt_update_password->execute();
+
+            echo '<script>alert("Heslo bylo úspěšně změněno.");</script>';
+        } else {
+            echo '<script>alert("Nová hesla se neshodují.");</script>';
+        }
+    } else {
+        echo '<script>alert("Aktuální heslo není správné.");</script>';
+    }
+}
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
     die("Nepodařilo se připojit k databázi: " . $e->getMessage());
 }
 
@@ -56,16 +95,31 @@ if ($stmt->rowCount() > 0) {
     <!-- CSS Files -->
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.2/components/logins/login-5/assets/css/login-5.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" data-no-delete="yes" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" data-no-delete="yes"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <script>
         function editAccount() {
             document.getElementById('account-info').style.display = 'none';
             document.getElementById('edit-account-form').style.display = 'block';
         }
+        function editPassword(){
+            document.getElementById('account-info').style.display = 'none';
+            document.getElementById('edit').style.display = 'block';
+        }
+        function cancelPassword() {
+            document.getElementById('account-info').style.display = 'block';
+            document.getElementById('edit').style.display = 'none';
+        }
 
         function cancelEdit() {
             document.getElementById('account-info').style.display = 'block';
             document.getElementById('edit-account-form').style.display = 'none';
+        }
+
+
+        function adminFunction() {
+            window.open('admin_page.php', '_blank');
         }
     </script>
     <style>
@@ -133,13 +187,20 @@ if ($stmt->rowCount() > 0) {
             margin-right: 40px;
         }
     </style>
+
+<script>
+        function showPasswordChangeForm() {
+            document.getElementById('password-change-form').style.display = 'block';
+        }
+    </script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">Infosystém</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -171,23 +232,36 @@ if ($stmt->rowCount() > 0) {
             <p><strong>Pohlaví:</strong> <span id="sex"></span></p>
             <p><strong>Datum a čas registrace:</strong> <span id="register_date"></span></p>
             <div class="button-container">
+                <?php
+
+                $isAdmin = isset($_SESSION['isAdmin']) ? $_SESSION['isAdmin'] : false;
+
+
+                if ($isAdmin) {
+                    echo '<button class="white-button" onclick="adminFunction()">Admin</button>';
+                }
+                ?>
                 <button class="white-button" onclick="editAccount()">Editovat účet</button>
+                <button class="white-button" onclick="editPassword()">Změna Hesla</button>
             </div>
         </div>
         <div id="edit-account-form" style="display: none;">
             <form method="post" action="update_account.php" enctype="multipart/form-data">
                 <p>
                     <label for="edit_first_name">Jméno:</label>
-                    <input type="text" id="edit_first_name" name="edit_first_name" value="<?php echo $row['first_name']; ?>">
+                    <input type="text" id="edit_first_name" name="edit_first_name"
+                        value="<?php echo $row['first_name']; ?>">
                 </p>
                 <p>
                     <label for="edit_last_name">Příjmení:</label>
-                    <input type="text" id="edit_last_name" name="edit_last_name" value="<?php echo $row['last_name']; ?>">
+                    <input type="text" id="edit_last_name" name="edit_last_name"
+                        value="<?php echo $row['last_name']; ?>">
                 </p>
 
                 <p>
                     <label for="edit_phone_number">Telefonní číslo:</label>
-                    <input type="text" id="edit_phone_number" name="edit_phone_number" value="<?php echo $row['phone_number']; ?>">
+                    <input type="text" id="edit_phone_number" name="edit_phone_number"
+                        value="<?php echo $row['phone_number']; ?>">
                 </p>
 
                 <p><label for="edit_email">Email:</label>
@@ -209,13 +283,37 @@ if ($stmt->rowCount() > 0) {
                     <label for="edit_profile_picture" class="form-label">Profilová fotka</label>
                     <input type="file" class="form-control" name="profile_picture" id="edit_profile_picture">
                 </div>
+                
 
                 <p><button type="submit" class="white-button">Uložit změny</button>
                     <button type="button" class="white-button" onclick="cancelEdit()">Zrušit</button>
                 </p>
 
             </form>
+
+            
         </div>
+        <div id="edit" style="display: none;"><form method="post" action="" enctype="multipart/form-data">
+            <div class="mb-3">
+                <p>
+                    <label for="current_password">Aktuální heslo:</label>
+                    <input type="password" id="current_password" name="current_password" required>
+                </p>
+                <p>
+                    <label for="new_password">Nové heslo:</label>
+                    <input type="password" id="new_password" name="new_password" required>
+                </p>
+                
+                <p>
+                    <label for="confirm_password">Potvrzení hesla:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </p>
+                </div>
+                <p>
+                    <button type="submit" class="white-button" name="change_password">Změnit heslo</button>
+                    <button type="button" class="white-button" onclick="cancelPassword()">Zrušit</button>
+                </p>
+            </form></div>
     </div>
 </body>
 
@@ -292,6 +390,7 @@ function getImagePathBasedOnGender($gender)
         return "'pictures/default_profile_picture.jpg'";
     }
 }
+
 $conn = null;
 
 ?>

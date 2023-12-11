@@ -25,8 +25,19 @@ if (isset($_POST["register"])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $sex = $_POST['sex'];
     $is_admin = 0;
-    $phone_number = NULL;
-    $img = NULL;
+    $phone_number = $_POST['phone_number'];
+    $img = $_POST['profile_picture'];
+
+    $stmt = $conn->prepare("SELECT * FROM user WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $existingUser = $stmt->fetch();
+
+        if ($existingUser) {
+            // Zobrazení upozornění, že e-mail již existuje
+            echo '<script>alert("E-mail již existuje. Prosím zvolte jiný e-mail.");</script>';
+            header('Location: register.php');
+        } else {
     //kontrola nahrani obrazku
     if (isset($_FILES["profile_picture"])) {
         if ($_FILES["profile_picture"]["error"] === 0) {
@@ -67,6 +78,7 @@ if (isset($_POST["register"])) {
     } catch (PDOException $e) {
         echo "Chyba: " . $e->getMessage();
     }
+}
 } elseif (isset($_POST["login"])) {
     $login_email = $_POST['email'];
     $login_password = $_POST['password'];
@@ -79,10 +91,17 @@ if (isset($_POST["register"])) {
 
         if ($user && password_verify($login_password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
+            $_SESSION['isAdmin'] = $user['is_administrator'];
             header('Location: posts.php');
             exit();
         } else {
-            echo "Nesprávné přihlašovací údaje.";
+            
+            
+            echo '<script>alert("Nesprávné přihlašovací údaje.");</script>';
+            
+            
+            echo '<script>window.location.href = "index.php";</script>';
+
         }
     } catch (PDOException $e) {
         echo "Chyba: " . $e->getMessage();

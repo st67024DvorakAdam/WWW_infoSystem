@@ -19,11 +19,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user_id = $_SESSION['user_id'];
         $img = NULL;
 
-        if (isset($_FILES["profile_picture"])) {
-            if ($_FILES["profile_picture"]["error"] === 0) {
-                $img = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+
+       
+
+
+        if (isset($_FILES["profile_picture"]) && $_FILES["profile_picture"]["size"] > 0) {
+            // Získání informací o souboru
+            $image_info = getimagesize($_FILES["profile_picture"]["tmp_name"]);
+            $mime_type = $image_info['mime'];
+    
+            // Kontrola podporovaných formátů
+            $allowed_formats = ['image/gif', 'image/jpeg', 'image/bmp', 'image/png'];
+            if (!in_array($mime_type, $allowed_formats)) {
+                // Neplatný formát obrázku
+                echo "<script>alert('Neplatný formát obrázku. Podporované formáty jsou JPEG, PNG, GIF, BMP.');</script>";
+                exit;
             }
+    
+            // Kontrola rozměrů obrázku
+            $width = 800;
+            $height = intval($image_info[1] * ($width / $image_info[0]));
+    
+            // Získání obsahu obrázku
+            $post_image = file_get_contents($_FILES["profile_picture"]["tmp_name"]);
+    
+            // Konverze obrázku na formát JPEG
+            if ($mime_type != 'image/jpeg') {
+                switch ($mime_type) {
+                    case 'image/gif':
+                        $image = imagecreatefromgif($_FILES["profile_picture"]["tmp_name"]);
+                        break;
+                    case 'image/bmp':
+                        $image = imagecreatefrombmp($_FILES["profile_picture"]["tmp_name"]);
+                        break;
+                    case 'image/png':
+                        $image = imagecreatefrompng($_FILES["profile_picture"]["tmp_name"]);
+                        break;
+                }
+    
+                // Vytvoření prázdného obrázku s novými rozměry
+                $new_image = imagecreatetruecolor($width, $height);
+    
+                // Kopírování a převedení obrázku na formát JPEG
+                imagecopyresampled($new_image, $image, 0, 0, 0, 0, $width, $height, $image_info[0], $image_info[1]);
+    
+                ob_start(); // Otevření output bufferu
+                imagejpeg($new_image, null, 90); // Převod na formát JPEG a výstup do output bufferu
+                $post_image = ob_get_contents(); // Získání obsahu output bufferu
+                ob_end_clean(); // Uzavření a vyprázdnění output bufferu
+    
+                // Uvolnění paměti používané pro obrázek
+                imagedestroy($image);
+                imagedestroy($new_image);
+            }
+        } else {
+            $post_image = null;
         }
+
+
+
+
+
+
+        
 
         $sql = "UPDATE user SET 
             first_name = :first_name,
@@ -32,8 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             email = :email,
             sex = :sex";
 
-        if ($img !== NULL) {
-            $sql .= ", img = :img";
+        if ($post_image != NULL) {
+            $sql .= ", img = :post_image";
         }
 
         $sql .= " WHERE id = :user_id";
@@ -45,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':email', $_POST['edit_email']);
         $stmt->bindParam(':sex', $_POST['sex']);
         $stmt->bindParam(':user_id', $user_id);
-        if ($img !== NULL) {
-            $stmt->bindParam(':img', $img, PDO::PARAM_LOB);
+        if ($post_image !== NULL) {
+            $stmt->bindParam(':post_image', $post_image, PDO::PARAM_LOB);
         }
 
         $stmt->bindParam(':user_id', $user_id);

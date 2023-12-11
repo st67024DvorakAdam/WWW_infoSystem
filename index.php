@@ -95,12 +95,7 @@ $url = "index.php";
                                         <input type="password" class="form-control" name="password" id="password" value="" required>
                                     </div>
                                     <div class="col-12">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" name="remember_me" id="remember_me">
-                                            <label class="form-check-label text-secondary" for="remember_me">
-                                                Zapamatovat si mě
-                                            </label>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">

@@ -145,7 +145,7 @@ $url = "index.php";
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="phone_number" class="form-label">Telefonní číslo</label>
-                                        <input type="number" class="form-control" name="phone_number" id="phone_number">
+                                        <input type="number" class="form-control" name="phone_number" id="phone_number" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="profile_picture" class="form-label">Profilová fotka</label>
@@ -163,10 +163,7 @@ $url = "index.php";
                                 </div>
                             </div>
 
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
-                                <label class="form-check-label" for="remember_me">Zapamatovat si mě</label>
-                            </div>
+                            
                             <button type="submit" class="btn btn-primary" name="register">Zaregistrovat</button>
                             <div class="mt-3">
                                 <a href="index.php" class="link-secondary">Již máte vytvořený účet?</a>

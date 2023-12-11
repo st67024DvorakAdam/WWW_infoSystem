@@ -1,5 +1,7 @@
 <?php
 session_start();
+// Získání ID přihlášeného uživatele
+$user_id = $_SESSION['user_id'];
 if (!isset($_SESSION['user_id'])) {
     // Uživatel není přihlášen, takže zrušíme jeho relaci
     session_destroy();
@@ -108,7 +110,11 @@ width: 100%;
     }
 
 
-    
+    @keyframes blinker {
+        50% {
+            opacity: 0;
+        }
+    }
 
    
 </style>
@@ -141,6 +147,41 @@ width: 100%;
             </div>
         </div>
     </nav>
+
+    <div>
+    <?php
+$host = 'localhost';
+$dbname = 'db';
+$user = 'root';
+$pass = '';
+
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+} catch (PDOException $e) {
+    echo "Chyba připojení: " . $e->getMessage();
+}
+
+
+    //ověření nových zpráv
+$sql_new_messages = "SELECT COUNT(*) FROM message WHERE receiver_id = $user_id AND isLookedByUser = 0";
+$new_messages_result = $conn->query($sql_new_messages);
+
+// Kontrola, zda existují nové zprávy
+$newMessages = false; // Výchozí hodnota pro newMessages
+$count = $new_messages_result->fetchColumn(); // Získání hodnoty počtu zpráv
+if ($count > 0) {
+    $newMessages = true; // Pokud existují nové zprávy, nastavíme newMessages na true
+}
+if ($newMessages == true) {
+    echo "<b style='animation: blinker 1s linear infinite; color: red;'>Nové zprávy</b>";
+}else{
+    echo "Žádné nové zprávy";
+}
+    ?>
+</div>
+
      <!-- vytvoření nového postu -->
      <div class="list">
     
@@ -174,17 +215,7 @@ width: 100%;
     <!-- post list -->
     <div class="list">
     <?php
-$host = 'localhost';
-$dbname = 'db';
-$user = 'root';
-$pass = '';
 
-try {
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo "Chyba připojení: " . $e->getMessage();
-}
 
 // Získání dat z tabulky "Post" seřazených podle postDateTime sestupně
 $sql = "SELECT * FROM Post ORDER BY postDateTime DESC";
@@ -208,6 +239,7 @@ if ($result->rowCount() > 0) {
         } else {
             $username = "Neznámý uživatel";
         }
+
 ?>
 <div class="row">
     <div class="col-sm-6">
