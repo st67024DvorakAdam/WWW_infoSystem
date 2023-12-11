@@ -27,7 +27,7 @@ $url = "index.php";
     }
 
     body {
-        background-color: #2069f5;
+        background-color: #108FFD;
         background-size: cover;
         /* Nastaví obrázek tak, aby pokrýval celou plochu */
         background-attachment: fixed;
